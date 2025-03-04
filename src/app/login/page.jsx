@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { redirect } from "next/navigation";
-import FormButton from "../components/FormButton/FormButton";
-import InputComponent from "../components/InputComponent/InputComponent";
-import { loginUser } from "../actions/loginUser";
+import FormButton from "@/components/FormButton/FormButton";
+import InputComponent from "@/components/InputComponent/InputComponent";
 import { useRouter } from "next/navigation";
+import { loginUser } from "@/actions/loginUser";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -47,7 +47,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       {error}
-      <FormButton text="Redirect" onClick={handleHomepageRedirect} />
+      <FormButton text="Homepage" onClick={handleHomepageRedirect} />
       <FormButton text="Login" onClick={(e) => handleLogin(e)} />
     </form>
   );
