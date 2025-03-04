@@ -1,6 +1,29 @@
 import Image from "next/image";
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 export default function Home() {
+
+  async function main() {
+    await prisma.user.create({
+      data: {
+        name: 'John Doe',
+        email: 'john.doe1@example.com',
+      },
+    });
+  
+    const users = await prisma.user.findMany();
+    console.log(users);
+  }
+  
+  main()
+    .catch((e) => {
+      throw e;
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
