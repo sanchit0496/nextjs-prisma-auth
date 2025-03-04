@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import { redirect } from "next/navigation";
 import FormButton from "../components/FormButton/FormButton";
 import InputComponent from "../components/InputComponent/InputComponent";
-import { createUser } from "../actions/createUser";
+import { loginUser } from "../actions/loginUser";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState('')
+
+  const router = useRouter()
 
   const handleHomepageRedirect = () => {
     redirect("/");
@@ -16,7 +20,14 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const create = await createUser(email, password)
+      const userFound = await loginUser(email, password)
+      console.log('userFound', userFound)
+      if(userFound){
+        router.push("/homepage")   
+      }else{
+        setError('Credentials Incorrect')
+      }
+
     } catch (error) {
       console.log(error)
     }
@@ -35,6 +46,7 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      {error}
       <FormButton text="Redirect" onClick={handleHomepageRedirect} />
       <FormButton text="Login" onClick={(e) => handleLogin(e)} />
     </form>
