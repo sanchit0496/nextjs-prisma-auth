@@ -1,8 +1,8 @@
 import React from 'react'
 
-const FormButton = ({text, onClick}) => {
+const FormButton = ({text, onClick, type}) => {
   return (
-    <button onClick={onClick}>{text}</button>
+    <button onClick={onClick} type={type}>{text}</button>
   )
 }
 

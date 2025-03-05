@@ -1,4 +1,4 @@
-import { logoutUser } from '@/actions/logoutUser';
+import { logoutUser } from '@/actions/user/logoutUser';
 import Link from 'next/link';
 import React from 'react'
 

@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { redirect } from "next/navigation";
 import FormButton from "@/components/FormButton/FormButton";
 import InputComponent from "@/components/InputComponent/InputComponent";
-import { createUser } from "@/actions/createUser";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/actions/user/createUser";
 
 
 const CreateAccount = () => {

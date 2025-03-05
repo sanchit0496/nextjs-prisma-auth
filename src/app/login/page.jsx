@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/actions/loginUser";
 import FormButton from "@/components/FormButton/FormButton";
 import InputComponent from "@/components/InputComponent/InputComponent";
+import { loginUser } from "@/actions/user/loginUser";
 
 const Login = () => {
     const [email, setEmail] = useState("");
