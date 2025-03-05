@@ -3,12 +3,14 @@
 import { deleteTopic } from "@/actions/topic/deleteTopic";
 import { editTopic } from "@/actions/topic/editTopic";
 import { getTopics } from "@/actions/topic/getTopics";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import InputComponent from "../InputComponent/InputComponent";
 
 const TopicList = () => {
   const [topics, setTopics] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const router = useRouter()
 
   useEffect(() => {
     fetchTopics();
@@ -56,6 +58,12 @@ const TopicList = () => {
     setSelectedTopic({ ...selectedTopic, topic: e.target.value });
   };
 
+  const handleTopicClick = (topic) => {
+    console.log(topic)
+    let slug = topic.id
+    router.push(`/topic/${slug}`)
+  }
+
   return (
     <div>
       <h1>Topic List</h1>
@@ -71,11 +79,11 @@ const TopicList = () => {
               <button onClick={handleEditClose}>Close</button>
             </>
           ) : (
-            <>
+            <div onClick={() => handleTopicClick(topic)}>
               {topic.topic}
               <button onClick={() => handleEdit(topic)}>Edit</button>
               <button onClick={() => handleDelete(topic)}>Delete</button>
-            </>
+            </div>
           )}
         </div>
       ))}
