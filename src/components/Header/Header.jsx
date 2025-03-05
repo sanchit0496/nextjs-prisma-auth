@@ -1,3 +1,4 @@
+import { logoutUser } from '@/actions/logoutUser';
 import Link from 'next/link';
 import React from 'react'
 
@@ -21,11 +22,13 @@ const Header = () => {
             </div>
         ));
     };
-
     
   return (
     <>
     {UIRender()}
+    <form action={logoutUser}>
+    <button type='submit'>Logout</button>
+    </form>
     </>
   )
 }
