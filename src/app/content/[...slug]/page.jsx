@@ -1,4 +1,5 @@
 import React from 'react'
+import NotFound from '@/app/notFound/page';
 
 const TheSlug = ({params}) => {
 
@@ -31,7 +32,7 @@ const TheSlug = ({params}) => {
     ];
 
     const {slug} = params 
-
+                                                   
     let pageData = []
     data.forEach((item) => {
         if(item.slug === slug[0]){
@@ -42,7 +43,7 @@ const TheSlug = ({params}) => {
   return (
     <div>
         {
-            pageData.length === 0 ? 'Not Found' : 
+            pageData.length === 0 ? <NotFound /> : 
             <div>
                 {pageData[0].header}
                 {pageData[0].content}
