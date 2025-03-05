@@ -1,6 +1,7 @@
 "use client";
 
 import createPost from "@/actions/post/createPost";
+import getPosts from "@/actions/post/getPosts";
 import React, { useState } from "react";
 import FormButton from "../FormButton/FormButton";
 import InputComponent from "../InputComponent/InputComponent";
@@ -15,6 +16,9 @@ const CreatePost = ({topic, user}) => {
         try {
             const postAdding = await createPost(post, user, topic);
             setError("")
+            // const data = await getPosts();
+            // const filteredData = data.filter((item) => item.topicId === topic)
+            // setPost(filteredData);
         } catch (error) {
             console.log(error);
             setError("Something went wrong!");

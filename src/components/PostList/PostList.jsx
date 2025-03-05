@@ -1,6 +1,7 @@
 "use client";
 
 
+import { deletePost } from "@/actions/post/deletePost";
 import getPosts from "@/actions/post/getPosts";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
@@ -11,17 +12,25 @@ const PostList = ({topic}) => {
   const router = useRouter()
 
   useEffect(() => {
-    fetchTopics();
+    fetchPosts();
   }, []);
 
-  const fetchTopics = async () => {
+  const fetchPosts = async () => {
     try {
       const data = await getPosts();
       const filteredData = data.filter((item) => item.topicId === topic)
-      console.log('filteredData', filteredData)
       setPosts(filteredData);
     } catch (error) {
       console.error("Error fetching posts:", error);
+    }
+  };
+
+  const handleDelete = async (post) => {
+    try {
+      await deletePost(post.id);
+      fetchPosts();
+    } catch (error) {
+      console.error("Error deleting topics:", error);
     }
   };
 
@@ -31,8 +40,9 @@ const PostList = ({topic}) => {
       {posts.map((post) => (
         <div key={post.id}>
           {
-            <div onClick={() => handleTopicClick(post)}>
+            <div>
               {post.content}
+              <button onClick={() => handleDelete(post)}>Delete</button>
             </div>
           }
         </div>
