@@ -5,13 +5,15 @@ import React, { useState } from "react";
 import FormButton from "../FormButton/FormButton";
 import InputComponent from "../InputComponent/InputComponent";
 
-const CreateTopic = () => {
+const CreateTopic = ({user}) => {
   const [topic, setTopic] = useState("");
+  const [error, setError] = useState('')
 
   const handleCreateTopic = async (e) => {
         e.preventDefault();
         try {
-            const topicAdding = await createTopic(topic);
+            const topicAdding = await createTopic(topic, user);
+            setError("")
         } catch (error) {
             console.log(error);
             setError("Something went wrong!");
@@ -26,6 +28,7 @@ const CreateTopic = () => {
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
       />
+      {error}
       <FormButton type="submit" text="Create" />
     </form>
   );

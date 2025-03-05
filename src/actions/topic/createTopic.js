@@ -5,18 +5,18 @@ import { cookies } from 'next/headers';
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-export async function createTopic(topic, userId){
-    const userSession = cookies().get("userSession")?.value;
+export async function createTopic(topic, user){
 
-    console.log('topic', topic)
-    console.log('userSession', userSession)
+    console.log('topic called', topic)
+    console.log('user called', user)
 
     await prisma.topic.create({
         data: {
           topic: topic,
+          userId: user?.id
         },
       });
     
-      const users = await prisma.topic.findMany();
-      console.log(users);
+      const topics = await prisma.topic.findMany();
+      console.log(topics);
 }

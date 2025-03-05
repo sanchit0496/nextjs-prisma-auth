@@ -8,14 +8,29 @@ datasource db {
 }
 
 model User {
-  id    Int @id @default(autoincrement())
-  password  String @default("")
-  email String  @unique
+  id       String  @id @default(uuid())
+  password String  @default("")
+  email    String  @unique
+
+  topics   Topic[]    // Relation to topics
+  comments Comment[]  // Relation to comments
 }
 
-
-
 model Topic {
-  id    Int @id @default(autoincrement())
-  topic String  @unique
+  id       String  @id @default(uuid())
+  topic    String  @unique
+  userId   String
+  user     User     @relation(fields: [userId], references: [id])
+
+  comments Comment[] // Relation to comments
+}
+
+model Comment {
+  id         String @id @default(uuid())
+  comment    String
+  userId     String
+  topicId    String
+
+  user  User  @relation(fields: [userId], references: [id])
+  topic Topic @relation(fields: [topicId], references: [id])
 }
